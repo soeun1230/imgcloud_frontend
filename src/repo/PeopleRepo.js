@@ -1,3 +1,4 @@
+import PeopleList from "./header/PeopleList";
 import RepoNavi from "./header/RepoNavi";
 import Sort from "./header/Sort";
 
@@ -12,8 +13,9 @@ const PeopleRepo = () => {
 
   return (
     <div style={style}>
-      <RepoNavi repoName="인물" />
+      <RepoNavi repoName="인물" repoType="people" />
       <Sort />
+      <PeopleList />
     </div>
   );
 };

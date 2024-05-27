@@ -18,6 +18,9 @@ const KakaoRedirectPage = () => {
       const data = response.data; // 응답 데이터
       console.log("HTTP 상태 코드:", response.status);
       alert("로그인 성공");
+      localStorage.setItem("email", data.email);
+      localStorage.setItem("nickname", data.nickname);
+      localStorage.setItem("picture", data.picture);
       setUser({
         email: data.email,
         nickname: data.nickname,

@@ -1,5 +1,6 @@
 import RepoNavi from "./header/RepoNavi";
 import Sort from "./header/Sort";
+import ThingList from "./header/ThingList";
 
 const ThingRepo = () => {
   const style = {
@@ -12,8 +13,9 @@ const ThingRepo = () => {
 
   return (
     <div style={style}>
-      <RepoNavi repoName="풍경 및 사물" />
+      <RepoNavi repoName="풍경 및 사물" repoType="thing" />
       <Sort />
+      <ThingList />
     </div>
   );
 };

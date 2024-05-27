@@ -1,12 +1,20 @@
 import "../../css/RepoNavi.css";
+import React, { useRef } from "react";
+import ImgUpload from "./ImgUpload";
 
 // 나중에 .png .svg 파일로 바꾸기
-const RepoNavi = ({ repoName }) => {
+const RepoNavi = ({ repoName, repoType }) => {
+  const imgUploadRef = useRef(null);
+
+  const handleUploadClick = () => {
+    imgUploadRef.current.triggerFileInput();
+  };
   return (
     <div className="RepoNavi">
       <div className="RepoName">{repoName}</div>
       <div className="buttonList">
-        <div className="button">
+        <ImgUpload ref={imgUploadRef} repoType={repoType} />
+        <div className="button" onClick={handleUploadClick}>
           <img src="img/upload.png" />
           <div>사진 올리기</div>
         </div>
