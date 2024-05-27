@@ -1,0 +1,36 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 20px; /* Matching padding with RepoNavi */
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+}
+
+.blank {
+  width: 70px;
+}
+
+.filename {
+  width: 200px;
+  text-align: left;
+  word-wrap: break-word; /* Ensures long filenames wrap to the next line */
+  white-space: normal; /* Allows text to wrap */
+  overflow: hidden; /* Hides any overflowing text */
+  text-overflow: ellipsis; /* Adds ellipsis (...) to indicate overflow */
+}
+
+.score {
+  width: 106px;
+  text-align: center;
+}
+
+.list .blank {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}

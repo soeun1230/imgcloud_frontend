@@ -10,12 +10,12 @@ const Header = () => {
       <div className="userInfo">
         <div>
           <img
-            src={user.picture || "img/profile.svg"}
+            src={localStorage.getItem("picture") || "img/profile.svg"}
             style={{ width: "50px" }}
           ></img>
         </div>
-        <div>{user.nickname}</div>
-        <div>{user.email}</div>
+        <div>{localStorage.getItem("nickname")}</div>
+        <div>{localStorage.getItem("email")}</div>
       </div>
       <div className="logo">
         <img src="img/imgcloud_logo.png" />
