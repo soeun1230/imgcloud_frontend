@@ -3,9 +3,9 @@ import axios from "axios";
 import { useAppContext } from "../../context/AppContext";
 import { v4 as uuidv4 } from "uuid";
 
-const ImgUpload = React.forwardRef(({ repoType }, ref) => {
+const PersonImgUpload = React.forwardRef((props, ref) => {
   const fileInputRef = useRef(null);
-  const { setPeopleRepo, setThingRepo } = useAppContext();
+  const { setPeopleRepo } = useAppContext();
 
   React.useImperativeHandle(ref, () => ({
     triggerFileInput: () => {
@@ -30,11 +30,7 @@ const ImgUpload = React.forwardRef(({ repoType }, ref) => {
       score: null,
     }));
 
-    if (repoType === "people") {
-      setPeopleRepo((prev) => [...prev, ...newImages]);
-    } else if (repoType === "thing") {
-      setThingRepo((prev) => [...prev, ...newImages]);
-    }
+    setPeopleRepo((prev) => [...prev, ...newImages]);
 
     Array.from(files).forEach((file) => {
       formData.append("image", file);
@@ -42,7 +38,7 @@ const ImgUpload = React.forwardRef(({ repoType }, ref) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/calculate/brisque",
+        "http://localhost:8080/calculate/brisque/faces",
         formData,
         {
           headers: {
@@ -52,29 +48,16 @@ const ImgUpload = React.forwardRef(({ repoType }, ref) => {
       );
       const scores = response.data;
 
-      if (repoType === "people") {
-        setPeopleRepo((prev) =>
-          prev.map((img) => {
-            const scoreIndex = newImages.findIndex(
-              (newImg) => newImg.id === img.id
-            );
-            return scoreIndex !== -1
-              ? { ...img, score: scores[scoreIndex] }
-              : img;
-          })
-        );
-      } else if (repoType === "thing") {
-        setThingRepo((prev) =>
-          prev.map((img) => {
-            const scoreIndex = newImages.findIndex(
-              (newImg) => newImg.id === img.id
-            );
-            return scoreIndex !== -1
-              ? { ...img, score: scores[scoreIndex] }
-              : img;
-          })
-        );
-      }
+      setPeopleRepo((prev) =>
+        prev.map((img) => {
+          const scoreIndex = newImages.findIndex(
+            (newImg) => newImg.id === img.id
+          );
+          return scoreIndex !== -1
+            ? { ...img, score: scores[scoreIndex] }
+            : img;
+        })
+      );
     } catch (error) {
       console.error("Brisque점수 계산 실패:", error);
     }
@@ -95,4 +78,4 @@ const ImgUpload = React.forwardRef(({ repoType }, ref) => {
   );
 });
 
-export default ImgUpload;
+export default PersonImgUpload;
