@@ -5,7 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const ImgUpload = React.forwardRef(({ repoType }, ref) => {
   const fileInputRef = useRef(null);
-  const { setPeopleRepo, setThingRepo } = useAppContext();
+  const { peopleRepo, setPeopleRepo, thingRepo, setThingRepo } =
+    useAppContext();
 
   React.useImperativeHandle(ref, () => ({
     triggerFileInput: () => {
