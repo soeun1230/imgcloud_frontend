@@ -1,6 +1,7 @@
 import "../../css/RepoNavi.css";
 import React, { useRef } from "react";
 import ImgUpload from "./ImgUpload";
+import PersonImgUpload from "./PersonImgUpload";
 
 // 나중에 .png .svg 파일로 바꾸기
 const RepoNavi = ({ repoName, repoType }) => {
@@ -13,7 +14,11 @@ const RepoNavi = ({ repoName, repoType }) => {
     <div className="RepoNavi">
       <div className="RepoName">{repoName}</div>
       <div className="buttonList">
-        <ImgUpload ref={imgUploadRef} repoType={repoType} />
+        {repoType === "thing" ? (
+          <ImgUpload ref={imgUploadRef} repoType={repoType} />
+        ) : (
+          <PersonImgUpload ref={imgUploadRef} />
+        )}
         <div className="button" onClick={handleUploadClick}>
           <img src="img/upload.png" />
           <div>사진 올리기</div>
